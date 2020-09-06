@@ -94,7 +94,7 @@ func handlerAuthCheck(h http.Handler) http.Handler {
 						http.Redirect(w, r, forbiddenPath, http.StatusFound)
 						return
 					}
-					permissions, err := adminUsers.ConvertPermissions(u.Permissions.RawMessage)
+					permissions, err := adminUsers.ConvertPermissions(u.Permissions)
 					if err != nil {
 						log.Printf("error getting permissions for %s: %v", jwtdata.Username, err)
 						http.Redirect(w, r, forbiddenPath, http.StatusFound)

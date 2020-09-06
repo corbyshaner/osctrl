@@ -15,10 +15,10 @@ OSQUERY_JSON="$DATA/osquery-cfg.json"
 
 # Check if database is ready, otherwise commands will fail
 until $(./bin/osctrl-cli -D "$DB_JSON" check); do
-  >&2 echo "Postgres is unavailable - Waiting..."
+  >&2 echo "Mysql is unavailable - Waiting..."
   sleep $WAIT
 done
->&2 echo "Postgres is up - Starting $NAME"
+>&2 echo "Mysql is up - Starting $NAME"
 sleep $WAIT
 
 # Create environment dev

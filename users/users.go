@@ -8,7 +8,6 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
-	"github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/jmpsec/osctrl/types"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -16,15 +15,16 @@ import (
 // AdminUser to hold all users
 type AdminUser struct {
 	gorm.Model
-	Username      string `gorm:"index"`
-	Email         string
-	Fullname      string
-	PassHash      string
-	APIToken      string
-	TokenExpire   time.Time
-	Admin         bool
-	CSRFToken     string
-	Permissions   postgres.Jsonb
+	Username    string `gorm:"index"`
+	Email       string
+	Fullname    string
+	PassHash    string
+	APIToken    string
+	TokenExpire time.Time
+	Admin       bool
+	CSRFToken   string
+	//Permissions   postgres.Jsonb
+	Permissions   string `gorm:"type:json"`
 	LastIPAddress string
 	LastUserAgent string
 	LastAccess    time.Time
@@ -162,7 +162,7 @@ func (m *UserManager) New(username, password, email, fullname string, admin bool
 			Username:    username,
 			PassHash:    passhash,
 			Admin:       admin,
-			Permissions: postgres.Jsonb{RawMessage: permsRaw},
+			Permissions: string(permsRaw),
 			Email:       email,
 			Fullname:    fullname,
 		}, nil
@@ -217,7 +217,7 @@ func (m *UserManager) ChangePermissions(username string, permissions UserPermiss
 	if err != nil {
 		return err
 	}
-	if err := m.DB.Model(&user).Update("permissions", postgres.Jsonb{RawMessage: rawPerms}).Error; err != nil {
+	if err := m.DB.Model(&user).Update("permissions", string(rawPerms)).Error; err != nil {
 		return fmt.Errorf("Update %v", err)
 	}
 	return nil

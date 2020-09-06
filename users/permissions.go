@@ -57,7 +57,7 @@ func (m *UserManager) CheckPermissions(username string, level AccessLevel, envir
 	if user.Admin {
 		return true
 	}
-	perms, err := m.ConvertPermissions(user.Permissions.RawMessage)
+	perms, err := m.ConvertPermissions(user.Permissions)
 	if err != nil {
 		log.Printf("error converting permissions %v", err)
 		return false
@@ -80,16 +80,16 @@ func (m *UserManager) GetPermissions(username string) (UserPermissions, error) {
 	if err != nil {
 		return perms, fmt.Errorf("error getting user %v", err)
 	}
-	if err := json.Unmarshal(user.Permissions.RawMessage, &perms); err != nil {
+	if err := json.Unmarshal([]byte(user.Permissions), &perms); err != nil {
 		return perms, fmt.Errorf("error parsing permissions %v", err)
 	}
 	return perms, nil
 }
 
 // ConvertPermissions to convert from stored Jsonb to struct
-func (m *UserManager) ConvertPermissions(raw json.RawMessage) (UserPermissions, error) {
+func (m *UserManager) ConvertPermissions(raw string) (UserPermissions, error) {
 	var perms UserPermissions
-	if err := json.Unmarshal(raw, &perms); err != nil {
+	if err := json.Unmarshal([]byte(raw), &perms); err != nil {
 		return perms, fmt.Errorf("error parsing permissions %v", err)
 	}
 	return perms, nil

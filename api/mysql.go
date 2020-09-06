@@ -20,7 +20,7 @@ type OsqueryQueryData struct {
 type APIQueryData map[string]json.RawMessage
 
 // Function to retrieve the query log by name
-func postgresQueryLogs(name string) (APIQueryData, error) {
+func mysqlQueryLogs(name string) (APIQueryData, error) {
 	var logs []OsqueryQueryData
 	data := make(APIQueryData)
 	if err := db.Where("name = ?", name).Find(&logs).Error; err != nil {

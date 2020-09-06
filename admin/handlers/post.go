@@ -38,7 +38,7 @@ func (h *HandlersAdmin) LoginPOSTHandler(w http.ResponseWriter, r *http.Request)
 		h.Inc(metricAdminErr)
 		return
 	}
-	permissions, err := h.Users.ConvertPermissions(user.Permissions.RawMessage)
+	permissions, err := h.Users.ConvertPermissions(user.Permissions)
 	if err != nil {
 
 	}

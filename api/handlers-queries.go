@@ -260,7 +260,7 @@ func apiQueryResultsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Get query by name
-	queryLogs, err := postgresQueryLogs(name)
+	queryLogs, err := mysqlQueryLogs(name)
 	if err != nil {
 		if err.Error() == "record not found" {
 			apiErrorResponse(w, "query not found", http.StatusNotFound, err)

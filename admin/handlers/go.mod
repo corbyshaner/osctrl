@@ -4,8 +4,7 @@ go 1.14
 
 require (
 	github.com/gorilla/mux v1.7.4
-	github.com/gorilla/sessions v1.2.0 // indirect
-	github.com/jinzhu/gorm v1.9.12
+	github.com/jinzhu/gorm v1.9.16
 	github.com/jmpsec/osctrl/admin/sessions v0.2.2
 	github.com/jmpsec/osctrl/carves v0.2.2
 	github.com/jmpsec/osctrl/environments v0.2.2

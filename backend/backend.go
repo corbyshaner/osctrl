@@ -49,7 +49,7 @@ func LoadConfiguration(file, key string) (JSONConfigurationDB, error) {
 	return config, nil
 }
 
-// GetDB to get PostgreSQL DB using GORM
+// GetDB to get Mysql DB using GORM
 func GetDB(config JSONConfigurationDB) (*gorm.DB, error) {
 	// Generate DB connection string
 	mysqlDSN := fmt.Sprintf(DBString, config.Username, config.Password, config.Host, config.Name)
