@@ -7,15 +7,15 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/jinzhu/gorm"
-	// Import postgres dialect
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	// Import mysql dialect
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 const (
 	// DBString to format connection string to database
-	DBString = "host=%s port=%s dbname=%s user=%s password=%s sslmode=disable"
+	DBString = "%s:%s@(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local"
 	// DBDialect for the database to use
-	DBDialect = "postgres"
+	DBDialect = "mysql"
 	// DBKey to identify the configuration JSON key
 	DBKey = "db"
 )
@@ -52,10 +52,9 @@ func LoadConfiguration(file, key string) (JSONConfigurationDB, error) {
 // GetDB to get PostgreSQL DB using GORM
 func GetDB(config JSONConfigurationDB) (*gorm.DB, error) {
 	// Generate DB connection string
-	postgresDSN := fmt.Sprintf(
-		DBString, config.Host, config.Port, config.Name, config.Username, config.Password)
+	mysqlDSN := fmt.Sprintf(DBString, config.Username, config.Password, config.Host, config.Name)
 	// Connect to DB
-	db, err := gorm.Open(DBDialect, postgresDSN)
+	db, err := gorm.Open(DBDialect, mysqlDSN)
 	if err != nil {
 		return nil, err
 	}

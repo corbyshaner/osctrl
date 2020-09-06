@@ -65,7 +65,7 @@ type CarvedBlock struct {
 	SessionID   string `gorm:"index"`
 	Environment string
 	BlockID     int
-	Data        string
+	Data        string `gorm:"type:text"`
 	Size        int
 }
 

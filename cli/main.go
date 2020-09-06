@@ -577,7 +577,7 @@ func init() {
 					Name:    "list",
 					Aliases: []string{"l"},
 					Usage:   "List all tags",
-					Action: cliWrapper(listTags),
+					Action:  cliWrapper(listTags),
 				},
 				{
 					Name:    "show",

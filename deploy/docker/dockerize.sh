@@ -241,7 +241,7 @@ DB_JSON="$CONFIGDIR/db.json"
 if [[ -f "$DB_JSON" && "$_FORCE" == false ]]; then
   log "Using existing $DB_JSON"
 else
-  configuration_db "$DEPLOYDIR/config/db.json" "$DB_JSON" "osctrl-db" "5432" "osctrl" "osctrl" "osctrl"
+  configuration_db "$DEPLOYDIR/config/db.json" "$DB_JSON" "osctrl-db" "3306" "osctrl" "osctrl" "osctrl"
 fi
 
 if [[ "$_BUILD" == true ]]; then

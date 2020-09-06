@@ -52,9 +52,9 @@ type TLSEnvironment struct {
 	Type             string
 	DebugHTTP        bool
 	Icon             string
-	Configuration    string
-	Flags            string
-	Certificate      string
+	Configuration    string `gorm:"type:text"`
+	Flags            string `gorm:"type:text"`
+	Certificate      string `gorm:"type:varchar(4096)"`
 	ConfigTLS        bool
 	ConfigInterval   int
 	LoggingTLS       bool

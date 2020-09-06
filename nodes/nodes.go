@@ -29,7 +29,7 @@ type OsqueryNode struct {
 	HardwareSerial  string
 	DaemonHash      string
 	ConfigHash      string
-	RawEnrollment   json.RawMessage
+	RawEnrollment   json.RawMessage `gorm:"type:text"`
 	LastStatus      time.Time
 	LastResult      time.Time
 	LastConfig      time.Time
