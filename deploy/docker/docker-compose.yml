@@ -6,6 +6,7 @@ services:
     image: mariadb
     volumes:
       - db-data:/var/lib/mysql
+      - ./deploy/docker/config/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       MYSQL_USER: osctrl
       MYSQL_PASSWORD: osctrl
@@ -15,6 +16,7 @@ services:
       - "3306:3306"
     networks:
       - private-net
+      - public-net
   osctrl-tls:
     container_name: osctrl-tls
     depends_on:
